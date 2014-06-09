@@ -1,6 +1,7 @@
 /target
 /classes
 /checkouts
+*.swp
 pom.xml
 pom.xml.asc
 *.jar
@@ -8,3 +9,4 @@ pom.xml.asc
 /.lein-*
 /.nrepl-port
 *.swap
+*.swp
