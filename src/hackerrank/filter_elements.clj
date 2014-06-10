@@ -54,9 +54,14 @@
     (dotimes [_ num-cases]
       (let [min-frequency (read-string (second (clojure.string/split (read-line) #" ")))
             coll (clojure.string/split (read-line) #" ")
-            has-min-frequency #(<= min-frequency (second %))
-            elements-with-minimum-frequency (map first (filter has-min-frequency (frequencies coll)))]
-        (if-not (empty? elements-with-minimum-frequency)
-          (apply println elements-with-minimum-frequency)
-          (println "-1"))))))
+            has-min-frequency? #(<= min-frequency %)
+            in? (fn [coll elem] (boolean (some #(= elem %) coll)))
+            [counts appearance] [(frequencies coll) (distinct coll)]]
+        (let [notfound (atom true)] 
+          (doseq [n appearance]
+              (when (has-min-frequency? (get counts n)) 
+                (print (str n " "))
+                (reset! notfound false)))
+          (when @notfound (print -1)))
+            (println)))))
 (-main)
