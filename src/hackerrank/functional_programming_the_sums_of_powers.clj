@@ -1,22 +1,21 @@
 (ns hackerrank.functional-programming-the-sums-of-powers)
+;https://www.hackerrank.com/challenges/functional-programming-the-sums-of-powers
 
 (defn find-ways 
   [remaining pow cur]
-  (let [raised (Math/pow cur pow)] 
+  (let [remaining (- remaining (Math/pow cur pow))] 
     (cond
-      (> raised remaining) 0
-      (= raised remaining) 1
+      (neg? remaining) 0
+      (zero? remaining) 1
       :default 
-      (let [rem2 (- remaining raised)
-            fw (partial find-ways rem2 pow)]
-        (reduce + (map fw (range cur)))))))
+      (let [fw (partial find-ways remaining pow)]
+        (reduce + (map fw (range 1 cur)))))))
 
 (defn sum-of-powers
   [sum power]
   (let [max-int (int (Math/pow sum (/ 1 power)))
         fw (partial find-ways sum power)]
     (reduce + (map fw (range 1 (inc max-int))))))
-
 
 (defn -main
   []
