@@ -12,7 +12,7 @@
   (let [[n, m] (parse)]
     (loop [sums 0 i m]
       (if (zero? i) 
-        (println (int (/ sums n))) 
+        (println (long (/ sums n))) 
         (let [[a b k] (parse)]
           (recur (+ sums (* k (inc (- b a)))) (dec i)))))))
 
