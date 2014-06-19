@@ -63,7 +63,7 @@
   []
   (map read-string (clojure.string/split (read-line) #"\s")))
 
-(defn f-at-x
+(defn f-of-x
   [coefficients powers x]
   (reduce + (map #(* %1 (Math/pow x %2)) coefficients powers)))
 
@@ -74,8 +74,8 @@
         powers (parse-line) 
         [start stop] (parse-line) 
         bounds (range start (+ stop delta) delta)
-        f (partial f-at-x coefficients powers)
-        area (* delta (reduce + (map f bounds)))
-        volume (* delta (reduce + (map #(* Math/PI (Math/pow (f %) 2)) bounds)))]
+        y (map (partial f-of-x coefficients powers) bounds) ; y = f(x)
+        area (* delta (reduce + y))
+        volume (* delta (reduce + (map #(* Math/PI (Math/pow % 2)) y)))]
     (println area)
     (println volume)))
