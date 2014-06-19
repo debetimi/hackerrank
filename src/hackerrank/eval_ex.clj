@@ -10,15 +10,12 @@
 
 (defn series-expansion-e-to-the-x
   [x]
-  (println (format "%.4f" (reduce + (map (partial nth-order-term x) (range 10))))))
+  (reduce + (map (partial nth-order-term x) (range 10))))
 
-
-;; can simplify (read-string (read-line)) to (read)
-(defn -main 
-  [] 
-  (let [n (read-string (read-line))]
-    (dotimes [_ n]
-      (let [x (read-string (read-line))] 
-        (series-expansion-e-to-the-x x)))))
+;; using line-seq
+(defn -main
+  []
+  (let [lines (line-seq (java.io.BufferedReader. *in*))]
+    (mapv (comp println #(format "%.4f" %) series-expansion-e-to-the-x read-string) (rest lines))))
 
 
