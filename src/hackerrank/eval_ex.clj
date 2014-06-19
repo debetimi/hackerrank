@@ -1,5 +1,7 @@
 (ns hackerrank.eval-ex)
 
+;https://www.hackerrank.com/challenges/eval-ex
+
 (defn factorial
   [n]
   (reduce * (range 1 (inc n))))
@@ -15,7 +17,7 @@
 ;; using line-seq
 (defn -main
   []
-  (let [lines (line-seq (java.io.BufferedReader. *in*))]
+  (let [lines (line-seq (clojure.java.io/reader *in*))]
     (mapv (comp println #(format "%.4f" %) series-expansion-e-to-the-x read-string) (rest lines))))
 
 
