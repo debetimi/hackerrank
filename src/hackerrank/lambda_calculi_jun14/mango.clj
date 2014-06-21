@@ -19,9 +19,7 @@
         (= mangos min-mangos-eaten) k
         (and (= k high) (> mangos min-mangos-eaten))  k
         (and (= k low) (< mangos min-mangos-eaten)) (dec k) 
-        :else (let [[nl nh] (cond 
-                              (> mangos min-mangos-eaten) [(inc k) high]
-                              :else [low k])]
+        :else (let [[nl nh] (if (> mangos min-mangos-eaten) [(inc k) high] [low k])]
                 (recur nl nh))))))
 
 (defn parse-vec [] (read-string (str "[" (read-line) "]")))
