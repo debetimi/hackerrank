@@ -41,12 +41,8 @@
   [line]
   (reverse (read-string (str "[" line "]"))))
 
-(defn -main
-  []
+(defn -main []
   (let [_ (read-line)
         lines (line-seq (clojure.java.io/reader *in*))
         f (comp #(max-points % starting-dice 1 1 0) parse)]
     (println (clojure.string/join "\n" (map f lines)))))
-
-
-
